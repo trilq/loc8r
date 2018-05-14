@@ -46,10 +46,10 @@ block content
           .card
             .card-header.bg-primary
               h3.card-title Location map
-            .card-body
+            img.card-img-top.img-fluid(src='http://maps.googleapis.com/maps/api/staticmap?center=51.455041,-0.9690884&zoom=17&size=400x350&sensor=false&markers=51.455041,-0.9690884&scale=2', atl='Location map')
       .row
         .col
-          .card
+          .card.mt-4
             .card-header.bg-primary
               a.card-link.btn.btn-dark.float-right(href="/location/review/new") Add review
               h3.card-title Customers reviews
