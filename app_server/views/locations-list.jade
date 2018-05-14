@@ -1,31 +1,30 @@
 extends layout
+
+include _includes/sharedHTMLfunctions
+
 block content
   #banner.mt-4.mb-4.pb-2.border.border-dark.border-top-0.border-right-0.border-left-0
     .row
       .col-lg-6
-        h3 Loc8r
-          small &nbsp;Find places to work with wifi near you!
+        h3= pageHeader.title
+          small &nbsp;#{pageHeader.strapLine}
   .row  
     .col-xs-12.col-sm-8
       ul.list-group
-        li.list-group-item
-          h4
-            a(href="/location") Starcups
-            &nbsp;
-            span.text-warning
-              i.fas.fa-star.fa-xs
-              i.fas.fa-star.fa-xs
-              i.fas.fa-star.fa-xs
-              i.far.fa-star.fa-xs
-              i.far.fa-star.fa-xs
-            span.badge.badge-danger.badge-pill.float-right.font-italic 100m
-          p.font-italic 125 High Street, Reading, RG6 1PS
-          h5
-            span.badge.badge-warning Hot drinks 
-            &nbsp;
-            span.badge.badge-warning Food 
-            &nbsp;
-            span.badge.badge-warning Premium wifi 
-            &nbsp;
+        each location in locations
+          li.list-group-item.mb-1
+            h4
+              a(href="/location")= location.name
+              small
+                span.text-warning.ml-2              
+                  +outputRating(location.rating)
+              small
+                span.badge.badge-danger.badge-pill.float-right.font-italic= location.distance
+            p.font-italic= location.address
+            h5
+              each facility in location.facilities
+                span.badge.badge-warning.mr-1 
+                  i.fas.fa-check 
+                  &nbsp;#{facility} 
     .col-xs-12.col-sm-4
       p Looking for a wifi and a seat ? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint ? Let Loc8r help you find the place you're looking for.

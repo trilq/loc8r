@@ -1,52 +1,44 @@
 extends layout
 
+include _includes/sharedHTMLfunctions
+
 block content
   #banner.mt-4.mb-4.pb-2.border.border-dark.border-top-0.border-right-0.border-left-0
     .row
       .col-lg-12
-        h1 Starcups
+        h1= pageHeader.title
   .row  
     .col-xs-12.col-sm-9
       .row
         .col-xs-12.col-sm-6
           p.text-warning
-            i.fas.fa-star
-            i.fas.fa-star
-            i.fas.fa-star
-            i.far.fa-star
-            i.far.fa-star
-          p.font-italic 125 High Street, Reading, RG6 1PS
+            +outputRating(location.rating)
+          p.font-italic= location.address
           .card
             .card-header.bg-primary
               h3.card-title Opening hours
             .card-body
-              p.card-text Monday - Friday : 7:00am - 7:00pm
-              p.card-text Saturday : 8:00am - 5:00pm
-              p.card-text Sunday : closed
+              each time in location.openingTimes
+                p.card-text 
+                  | #{time.days} :&nbsp;
+                  if time.closed
+                    | closed
+                  else
+                    | #{time.opening} - #{time.closing}
           .card
             .card-header.bg-primary
               h3.card-title Facilities
             .card-body
-              span.badge.badge-warning
-                span.h6
-                  i.fas.fa-check.fa-xs
-                  &nbsp;Hot drinks
-              &nbsp;
-              span.badge.badge-warning
-                span.h6
-                  i.fas.fa-check.fa-xs
-                  &nbsp;Food
-              &nbsp;
-              span.badge.badge-warning
-                span.h6
-                  i.fas.fa-check.fa-xs
-                  &nbsp;Premium wifi
-              &nbsp;
+              each facility in location.facilities
+                span.badge.badge-warning.mr-1
+                  span.h6
+                    i.fas.fa-check.fa-xs
+                    &nbsp;#{facility}
         .col-xs-12.col-sm-6
           .card
             .card-header.bg-primary
               h3.card-title Location map
-            img.card-img-top.img-fluid(src='http://maps.googleapis.com/maps/api/staticmap?center=51.455041,-0.9690884&zoom=17&size=400x350&sensor=false&markers=51.455041,-0.9690884&scale=2', atl='Location map')
+            img.card-img-top.img-fluid(src='http://maps.googleapis.com/maps/api/staticmap?center=#{location.coords.lat},#{location.coords.lng}&zoom=17&size=400x350&sensor=false&markers=#{location.coords.lat},#{location.coords.lng}&scale=2', atl='Location map')
       .row
         .col
           .card.mt-4
@@ -54,35 +46,17 @@ block content
               a.card-link.btn.btn-dark.float-right(href="/location/review/new") Add review
               h3.card-title Customers reviews
             .card-body
-              .card
-                .card-header
-                  span.text-warning.mr-4
-                    i.fas.fa-star
-                    i.fas.fa-star
-                    i.fas.fa-star
-                    i.fas.fa-star
-                    i.fas.fa-star
-                  span.card-text.mr-4
-                    span Simon Holmes
-                  span.card-text
-                    small 16 July 2018
-                .card-body
-                  p.card-text.font-italic What a great place. I cannot say enough good things about it.
-              .card
-                .card-header
-                  span.text-warning.mr-4
-                    i.fas.fa-star
-                    i.fas.fa-star
-                    i.fas.fa-star
-                    i.far.fa-star
-                    i.far.fa-star
-                  span.card-text.mr-4
-                    span Charlie Chaplin
-                  span.card-text
-                    small 20 June 2018
-                .card-body
-                  p.card-text.font-italic It was okay. Coffee was not great, but the wifi was fast.
-              
+              each review in location.reviews
+                .card
+                  .card-header
+                    span.text-warning.mr-4
+                      +outputRating(review.rating)
+                    span.card-text.mr-4
+                      span #{review.author}
+                    span.card-text
+                      small #{review.timestamp}
+                  .card-body
+                    p.card-text.font-italic !{(review.reviewText).replace(/\n/g, '<br/>')}          
     .col-xs-12.col-sm-3
-      p Simon's cafe is on Locc8r because it has accessible wifi and space to sit down with your laptop and get some work done.
-      p.small If you've been and you like it - or if you don't - please leave a review to help other people like you.
+      p #{location.name} #{sidebar.context}
+      p= sidebar.callToAction
