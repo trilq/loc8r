@@ -1,11 +1,30 @@
 doctype html
 html
   head
-    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title= title
-    link(rel='stylesheet', href='/bootstrap/css/amelia.bootstrap.min.css')
+    link(rel='stylesheet', href='/bootstrap/css/superhero.bootstrap.min.css')
+    link(rel='stylesheet', href='/fontawesome/css/fontawesome-all.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src='/javascript/jquery-3.3.1.min.js')
+    script(src='/javascripts/jquery-3.3.1.min.js')
     script(src='/bootstrap/js/bootstrap.min.js')
   body
-    block content
+    header
+      nav.navbar.navbar-expand-md.bg-primary.navbar-dark.fixed-top
+        .container
+          a.navbar-brand.text-success(href='/', alt='Loc8r') 
+            i.fas.fa-wifi.fa-spin
+            span.font-weight-bold.font-italic.text-success.h5.mr-3 Loc8r
+          button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbar-main')
+            span.navbar-toggler-icon
+          #navbar-main.navbar-collapse.collapse
+            ul.navbar-nav.mr-auto
+              li.nav-item
+                a.nav-link(href='/about/') About
+    main
+      .container
+        block content
+    footer
+      nav.navbar.fixed-bottom.bg-primary.navbar-dark
+        .container
+          .small &copy; Simon Holmes 2014

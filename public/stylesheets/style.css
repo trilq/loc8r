@@ -6,3 +6,9 @@ body {
 a {
   color: #00B7FF;
 }
+
+@media (min-width: 768px) {
+  .form-group.row > .col-form-label {
+    text-align: right;
+  }
+}

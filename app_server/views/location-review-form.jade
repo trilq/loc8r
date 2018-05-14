@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  #banner.mt-4.mb-4.pb-2.border.border-dark.border-top-0.border-right-0.border-left-0
+    .row
+      .col-lg-12
+        h1 Review Starcups
+  .row  
+    .col-xs-12.col-sm-6
+      form(action="/location", method="get")
+        .form-group.row
+          label.col-xs-12.col-sm-2.col-form-label.mr-2(for="name") Name
+          .col-xs-12.col
+            input#name.form-control(name="name")
+        .form-group.row
+          label.col-xs-12.col-sm-2.col-form-label.mr-2(for="rating") Rating
+          .col-xs-12.col
+            select#rating.form-control(name="rating")
+              option 5
+              option 4
+              option 3
+              option 2
+              option 1
+        .form-group.row
+          label.col-xs-12.col-sm-2.col-form-label.mr-2(for="review") Review
+          .col-xs-12.col
+            textarea#review.form-control(name="review", rows="5")
+        button.btn.btn-primary.float-right Add my review
+    .col-xs-12.col-sm-6
