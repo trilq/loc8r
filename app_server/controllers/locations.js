@@ -8,19 +8,19 @@ module.exports.homelist = function(req, res) {
     },
     locations: [{
       name: 'Starcups',
-      address: '125 High Street, Reading, RG6 1PS',
+      address: '125 High Street, Reading, RG6 1PS, London',
       rating: 3,
       facilities: ['Hot drinks', 'Food', 'Premium wifi'],
       distance: '100m'
     },{
-      name: 'Cafe Hero',
-      address: '125 High Street, Reading, RG6 1PS',
+      name: 'Cafe Central',
+      address: '115 Nguyen Hue Boulevard, Ben Nghe Ward, District 1, Saigon',
       rating: 4,
       facilities: ['Hot drinks', 'Food', 'Premium wifi'],
       distance: '200m'
     }, {
       name: 'Burger Queen',
-      address: '125 High Street, Reading, RG6 1PS',
+      address: '125 High Street, Reading, RG6 1PS, London',
       rating: 2,
       facilities: ['Food', 'Premium wifi'],
       distance: '250m'
@@ -31,18 +31,18 @@ module.exports.homelist = function(req, res) {
 /* Get 'Location info' page */
 module.exports.locationInfo = function(req, res) {
 	res.render('location-info', {
-    title: 'Starcups', 
-    pageHeader: {title: 'Starcups'}, 
+    title: 'Cafe Central', 
+    pageHeader: {title: 'Cafe Central'}, 
     sidebar: {
       context: 'is on Loc8r because it has accessible wifi and space to sit down with your laptop and get some work done.',
       callToAction: 'If you\'ve been and you like it - or you don\'t - please leave a review to help other people just like you.' 
     },
     location: {
-      name: 'Starcups',
-      address: '125 High Street, Reading, RG6 1PS',
+      name: 'Cafe Central',
+      address: '115 Nguyen Hue Boulevard, Ben Nghe Ward, District 1',
       rating: 3,
       facilities: ['Hot drinks', 'Food', 'Premium wifi'],
-      coords: {lat: 51.455041, lng: -0.9690884},
+      coords: {lat: 10.773861, lng: 106.703683},
       openingTimes: [{
         days: 'Monday - Friday',
         opening: '7:00am',
@@ -58,9 +58,9 @@ module.exports.locationInfo = function(req, res) {
         closed: true
       }],
       reviews: [{
-        author: 'Simon Holmes',
+        author: 'Tri Le',
         rating: 5,
-        timestamp: '20 July 2013',
+        timestamp: '20 Apr 2018',
         reviewText: 'What a great place. I can\'t say enough good things about it.'
       }, {
         author: 'Charlie Chaplin',
