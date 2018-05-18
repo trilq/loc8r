@@ -12,3 +12,8 @@ a {
     text-align: right;
   }
 }
+
+.img-fluid {
+  max-width: 100%;
+  height: 100%;
+}
