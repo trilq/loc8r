@@ -38,12 +38,13 @@ block content
           .card
             .card-header.bg-primary
               h3.card-title Location map
-            img.card-img-top.img-fluid(src='http://maps.googleapis.com/maps/api/staticmap?center=#{location.coords.lat},#{location.coords.lng}&zoom=17&size=400x350&sensor=false&markers=#{location.coords.lat},#{location.coords.lng}&scale=2&key=AIzaSyB-XAJGA4GFaIiNCQk3sKBiSnb26ZrORt4', atl='Location map')
+
+            img.card-img-top.img-fluid(src='https://maps.googleapis.com/maps/api/staticmap?center=#{location.coords.lat},#{location.coords.lng}&zoom=17&size=400x350&sensor=false&markers=#{location.coords.lat},#{location.coords.lng}&scale=2&key=AIzaSyB-XAJGA4GFaIiNCQk3sKBiSnb26ZrORt4', atl='Location map')
       .row
         .col
           .card.mt-4
             .card-header.bg-primary
-              a.card-link.btn.btn-dark.float-right(href="/location/review/new") Add review
+              a.card-link.btn.btn-dark.float-right(href="/location/#{location._id}/review/new") Add review
               h3.card-title Customers reviews
             .card-body
               each review in location.reviews
@@ -54,7 +55,8 @@ block content
                     span.card-text.mr-4
                       span #{review.author}
                     span.card-text
-                      small #{review.timestamp}
+                      small 
+                        +formatDate(review.createdOn)
                   .card-body
                     p.card-text.font-italic !{(review.reviewText).replace(/\n/g, '<br/>')}          
     .col-xs-12.col-sm-3

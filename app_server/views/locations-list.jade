@@ -10,11 +10,12 @@ block content
           small &nbsp;#{pageHeader.strapLine}
   .row  
     .col-xs-12.col-sm-8
+      .error= message
       ul.list-group
         each location in locations
           li.list-group-item.mb-1
             h4
-              a(href="/location")= location.name
+              a(href="/location/#{location._id}")= location.name
               small
                 span.text-warning.ml-2              
                   +outputRating(location.rating)
@@ -25,6 +26,6 @@ block content
               each facility in location.facilities
                 span.badge.badge-warning.mr-1 
                   i.fas.fa-check 
-                  &nbsp;#{facility} 
+                  | &nbsp;#{facility} 
     .col-xs-12.col-sm-4
-      p Looking for a wifi and a seat ? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint ? Let Loc8r help you find the place you're looking for.
+      p= sidebar
