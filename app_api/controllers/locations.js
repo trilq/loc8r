@@ -10,6 +10,7 @@ module.exports.locationsListByDistance = function(req, res) {
   var lng = parseFloat(req.query.lng);
   var lat = parseFloat(req.query.lat);
   var distance = parseFloat(req.query.distance);
+  
   var point = {
     type: "Point",
     coordinates: [lng, lat]

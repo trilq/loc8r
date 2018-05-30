@@ -3,9 +3,9 @@ extends layout
 include _includes/sharedHTMLfunctions
 
 block content
-  #banner.mt-4.mb-4.pb-2.border.border-dark.border-top-0.border-right-0.border-left-0
-    .row
-      .col-lg-12
+  .row
+    .col-12
+      #banner.mt-4.mb-4.pb-2.border.border-dark.border-top-0.border-right-0.border-left-0
         h1= pageHeader.title
   .row  
     .col-xs-12.col-sm-9
@@ -39,7 +39,7 @@ block content
             .card-header.bg-primary
               h3.card-title Location map
 
-            img.card-img-top.img-fluid(src='https://maps.googleapis.com/maps/api/staticmap?center=#{location.coords.lat},#{location.coords.lng}&zoom=17&size=400x350&sensor=false&markers=#{location.coords.lat},#{location.coords.lng}&scale=2&key=AIzaSyB-XAJGA4GFaIiNCQk3sKBiSnb26ZrORt4', atl='Location map')
+            img.card-img-top.img-fluid(src='https://maps.googleapis.com/maps/api/staticmap?center=#{location.coords.lat},#{location.coords.lng}&zoom=17&size=400x350&sensor=false&markers=anchor:bottomleft%7Cicon:https://chart.apis.google.com/chart?chst=d_map_xpin_icon%26chld=pin_sright%257Ccafe%257CFFBB00%7C#{location.coords.lat},#{location.coords.lng}&scale=2&key=AIzaSyB-XAJGA4GFaIiNCQk3sKBiSnb26ZrORt4', alt='Location map')
       .row
         .col
           .card.mt-4
@@ -60,5 +60,6 @@ block content
                   .card-body
                     p.card-text.font-italic !{(review.reviewText).replace(/\n/g, '<br/>')}          
     .col-xs-12.col-sm-3
-      p #{location.name} #{sidebar.context}
-      p= sidebar.callToAction
+      .alert.alert-secondary.font-italic
+        p #{location.name} #{sidebar.context}
+        p= sidebar.callToAction

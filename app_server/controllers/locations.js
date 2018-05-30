@@ -7,16 +7,24 @@ if (process.env.NODE_ENV === 'production') {
   apiOptions.server = "https://calm-river-86440.herokuapp.com";
 }
 
+var _isNumeric = function(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
 var _formatDistance = function(distance) {
   var numDistance, unit;
-  if (distance < 1000) {
-    numDistance = parseInt(distance, 10);
-    unit = 'm';
+  if (distance && _isNumeric(distance)) {
+    if (distance < 1000) {
+      numDistance = parseInt(distance, 10);
+      unit = 'm';
+    } else {
+      numDistance = parseFloat(distance/1000).toFixed(1);
+      unit = 'km';
+    }
+    return numDistance + unit;
   } else {
-    numDistance = parseFloat(distance/1000).toFixed(1);
-    unit = 'km';
+    return "?";
   }
-  return numDistance + unit;
 }
 
 var renderHomepage = function(req, res, locData) {
@@ -82,7 +90,8 @@ var renderReviewForm = function(req, res, locDetail) {
   res.render('location-review-form', {
     title: 'Review ' + locDetail.name + ' on Loc8r',
     pageHeader: {title: 'Review ' + locDetail.name},
-    error: req.query.err
+    error: req.query.err,
+    url: req.originalUrl
   });
 }
 

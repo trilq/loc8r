@@ -1,5 +1,54 @@
 extends layout
 
+include _includes/sharedHTMLfunctions
+
 block content
-  h1= title
-  p Welcome to #{title}
+  .row
+    .col-12
+      #banner.mt-2.mb-3.border.border-warning.border-top-0.border-right-0.border-left-0
+        .alert.alert-secondary.mb-0
+          h1.font-weight-bold  #{pageHeader.title}
+            small
+              &nbsp; 
+              i.fas.fa-arrow-right.fa-xs
+              &nbsp; 
+              span.text-muted #{pageHeader.strapLine}
+  .row(ng-controller="homeCtrl")  
+    .col-sm-12.col-lg-8
+      .carousel.slide#demo(data-ride="carousel")
+        ul.carousel-indicators
+          li.active(data-target="#demo", data-slide-to="0")
+          li(data-target="#demo", data-slide-to="1")
+          li(data-target="#demo", data-slide-to="2")
+        .carousel-inner
+          .carousel-caption
+            h3 Cafe Wifi
+            form#findLocations.form-inline.justify-content-center(action="/location/near", method="GET", role="form" ng-if="errorMessage.length === 0") 
+              .alert.alert-warning.alert-dismissible
+                button.py-2.px-3.close(type="button", data-dismiss="alert") &times;
+                strong Oops ! 
+                span.mr-0 Distance is in number of meters, please try again
+              input#distance.form-control.text-white.badge-pill.bg-transparent.mr-2(type="text", name="distance", placeholder="Enter the distance", data-toggle="tooltip", title="Distance in meters", data-placement="bottom")
+              button.btn.btn-primary.bg-transparent(type="submit", data-toggle="tooltip", title="Go!", data-placement="right") 
+                i.fas.fa-bicycle.fa-xl
+          .carousel-item.active
+            img(src="/images/wired-cafe.jpg", alt="Wired Cafe")
+          .carousel-item
+            img(src="/images/cafe-wifi.jpg", alt="Cafe Wifi")
+          .carousel-item
+            img(src="/images/digital-nomad.jpg", alt="Digital Nomad")
+                
+    .col-sm-12.col-lg-4(style="height: 500px")
+      .alert.alert-secondary.font-italic
+        p= sidebar
+      .card
+        .card-header.bg-primary
+          h3.card-title Location map
+        .car-body#map(style="height: 305px", ng-if="errorMessage.length === 0")
+      .alert.alert-warning(ng-if="errorMessage.length !== 0")
+        {{errorMessage}}
+    
+   
+      
+      
+      

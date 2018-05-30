@@ -14,6 +14,28 @@ a {
 }
 
 .img-fluid {
-  max-width: 100%;
-  height: 100%;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
 }
+
+img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+.tooltip-inner {
+  background-color: #4E5D6C !important;
+  color: #fff;
+}
+
+.bs-tooltip-bottom .arrow::before {
+  border-bottom-color: #4E5D6C;
+}
+
+.bs-tooltip-right .arrow::before {
+  border-right-color: #4E5D6C;
+}
+
+

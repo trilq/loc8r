@@ -1,16 +1,17 @@
 extends layout
 
 block content
-  #banner.mt-4.mb-4.pb-2.border.border-dark.border-top-0.border-right-0.border-left-0
-    .row
-      .col-lg-12
-        h1= pageHeader.title
+  .row
+    .col-12
+      #banner.mt-4.mb-4.pb-2.border.border-dark.border-top-0.border-right-0.border-left-0
+        h1 #{pageHeader.title} &nbsp;
+          span.text-muted= pageHeader.subtitle
   .row  
     .col-xs-12.col-sm-6
-      form#addReview(action="", method="post", role="form")
+      form#addReview(action="#{url}", method="post", role="form")
         - if (error == "val")
           .alert.alert-warning.alert-dismissible
-            button(type="button", data-dismiss="alert").close &times;
+            button.py-2.px-3.close(type="button", data-dismiss="alert") &times;
             strong Warning ! 
             span All fields required, please try again
         .form-group.row

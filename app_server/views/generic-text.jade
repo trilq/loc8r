@@ -7,4 +7,6 @@ block content
         h1= title
   .row  
     .col-md-6.col-sm-12
-      p !{(content).replace(/\n/g, '<br/>')}
+      .jumbotron.jumbotron-fluid
+        .container
+          p !{(content).replace(/\n/g, '<br/>')}
