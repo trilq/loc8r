@@ -1,0 +1,64 @@
+extends layout
+
+include _includes/sharedHTMLfunctions
+
+block content
+  .row
+    .col-12
+      #banner.mt-4.mb-4.pb-2.border.border-dark.border-top-0.border-right-0.border-left-0
+        h1= pageHeader.title
+  .row  
+    .col-xs-12.col-sm-9
+      .row
+        .col-xs-12.col-sm-6
+          p.text-warning
+            +outputRating(location.rating)
+          p.font-italic= location.address
+          .card
+            .card-header.bg-primary
+              h3.card-title Opening hours
+            .card-body
+              each time in location.openingTimes
+                p.card-text 
+                  | #{time.days} :&nbsp;
+                  if time.closed
+                    | closed
+                  else
+                    | #{time.opening} - #{time.closing}
+          .card
+            .card-header.bg-primary
+              h3.card-title Facilities
+            .card-body
+              each facility in location.facilities
+                span.badge.badge-warning.mr-1
+                  span.h6
+                    i.fas.fa-check.fa-xs
+                    | &nbsp;#{facility}
+        .col-xs-12.col-sm-6
+          .card
+            .card-header.bg-primary
+              h3.card-title Location map
+            img.card-img-top.img-fluid(src="https://maps.googleapis.com/maps/api/staticmap?center=" + location.coords.lat + "," + location.coords.lng + "&zoom=17&size=400x350&sensor=false&markers=anchor:bottomleft%7Cicon:https://chart.apis.google.com/chart?chst=d_map_xpin_icon%26chld=pin_sright%257Ccafe%257CFFBB00%7C" + location.coords.lat + "," + location.coords.lng + "&scale=2&key=AIzaSyB-XAJGA4GFaIiNCQk3sKBiSnb26ZrORt4", alt="Location map")
+      .row
+        .col
+          .card.mt-4
+            .card-header.bg-primary
+              a.card-link.btn.btn-dark.float-right(href="/location/#{location._id}/review/new") Add review
+              h3.card-title Customers reviews
+            .card-body
+              each review in location.reviews
+                .card
+                  .card-header
+                    span.text-warning.mr-4
+                      +outputRating(review.rating)
+                    span.card-text.mr-4
+                      span #{review.author}
+                    span.card-text
+                      small 
+                        +formatDate(review.createdOn)
+                  .card-body
+                    p.card-text.font-italic !{(review.reviewText).replace(/\n/g, '<br/>')}          
+    .col-xs-12.col-sm-3
+      .alert.alert-secondary.font-italic
+        p #{location.name} #{sidebar.context}
+        p= sidebar.callToAction

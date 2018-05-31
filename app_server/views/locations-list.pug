@@ -1,0 +1,33 @@
+extends layout
+
+include _includes/sharedHTMLfunctions
+
+block content
+  .row
+    .col-12
+      #banner.mt-4.mb-4.pb-2.border.border-dark.border-top-0.border-right-0.border-left-0
+        h3= pageHeader.title
+          small &nbsp;#{pageHeader.strapLine}
+  .row 
+    .col-xs-12.col-sm-8(ng-controller="locationListCtrl", data-distance=distance)
+      .alert.alert-warning.mb-2
+        label.mr-2(for="filter") Filter results
+        input#filter(type="text", name="filter", ng-model="textFilter")
+      .error {{ message }}
+      ul.list-group
+        li.list-group-item.mb-1(ng-repeat="location in data.locations | filter: textFilter")
+          h4
+            a(href="/location/{{ location._id }}") {{ location.name }}
+            small
+              span.text-warning.ml-2              
+                small(rating-stars, rating="location.rating")
+            small
+              span.badge.badge-danger.badge-pill.float-right.font-italic.mt-2 {{ location.distance | formatDistance }}
+          p.font-italic {{ location.address }}
+          h5
+            span.badge.badge-warning.mr-1(ng-repeat="facility in location.facilities") 
+              i.fas.fa-check 
+              | &nbsp;{{ facility }} 
+    .col-xs-12.col-sm-4
+      .alert.alert-secondary.font-italic
+        p= sidebar
